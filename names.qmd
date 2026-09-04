@@ -40,13 +40,14 @@ baby_names |>
   scale_y_continuous(labels = scales::comma) +
   labs(
     title = "Popularity of the Name 'Shania' (Last 10 Years)",
+    subtitle = "A steady decline as the 1990s pop-culture influence fades into history",
     x = "Year",
     y = "Number of Babies"
   ) +
   theme_minimal()
 ```
 
-Over the last 100 years, the name **Shania** was absent from records until 1970. It experienced a dramatic surge in the mid-to-late 1990s, peaking in 1996 with 1,837 babies (likely influenced by country star Shania Twain), followed by a steady decline over the last two decades.
+Over the last 100 years, the name **Shania** was absent from records until 1970. Its dramatic explosion in the mid-1990s directly aligns with the February 1995 release of Shania Twain's smash-hit album, *[The Woman in Me](https://en.wikipedia.org/wiki/The_Woman_in_Me_(album))*. Following this peak of 1,837 babies in 1996, the name has steadily declined.
 
 ```{r}
 #| label: plot-shania-100
@@ -56,9 +57,20 @@ baby_names |>
   summarize(total = sum(n)) |>
   ggplot(aes(x = year, y = total)) +
   geom_line(color = "darkred", linewidth = 1) +
+  geom_vline(xintercept = 1995, linetype = "dashed", color = "gray50") +
+  annotate(
+    "text",
+    x = 1995,
+    y = 1700,
+    label = "1995: 'The Woman in Me' released",
+    hjust = 1.05,
+    size = 3.5
+  ) +
   scale_y_continuous(labels = scales::comma) +
   labs(
     title = "Popularity of the Name 'Shania' Over the Last 100 Years",
+    subtitle = "Surged after the 1995 release of Shania Twain's breakthrough album 'The Woman in Me'",
+    caption = "Source: US Social Security Administration",
     x = "Year",
     y = "Number of Babies"
   ) +
